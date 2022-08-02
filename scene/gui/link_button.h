@@ -46,6 +46,7 @@ public:
 
 private:
 	String text;
+	String url;
 	String xl_text;
 	UnderlineMode underline_mode;
 
@@ -57,6 +58,8 @@ protected:
 public:
 	void set_text(const String &p_text);
 	String get_text() const;
+	void set_url(const String &p_url);
+	String get_url() const;
 
 	void set_underline_mode(UnderlineMode p_underline_mode);
 	UnderlineMode get_underline_mode() const;

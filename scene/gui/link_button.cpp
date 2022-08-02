@@ -43,8 +43,23 @@ void LinkButton::set_text(const String &p_text) {
 	minimum_size_changed();
 }
 
+void LinkButton::set_url(const String &p_url) {
+	if (url == p_url) {
+		return;
+	}
+	url = p_url;
+
+	if (text == "") {
+		set_text(url);
+	}
+}
+
 String LinkButton::get_text() const {
 	return text;
+}
+
+String LinkButton::get_url() const {
+	return url;
 }
 
 void LinkButton::set_underline_mode(UnderlineMode p_underline_mode) {
@@ -129,6 +144,8 @@ void LinkButton::_notification(int p_what) {
 void LinkButton::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_text", "text"), &LinkButton::set_text);
 	ClassDB::bind_method(D_METHOD("get_text"), &LinkButton::get_text);
+	ClassDB::bind_method(D_METHOD("set_url", "url"), &LinkButton::set_url);
+	ClassDB::bind_method(D_METHOD("get_url"), &LinkButton::get_url);
 
 	ClassDB::bind_method(D_METHOD("set_underline_mode", "underline_mode"), &LinkButton::set_underline_mode);
 	ClassDB::bind_method(D_METHOD("get_underline_mode"), &LinkButton::get_underline_mode);
@@ -138,6 +155,7 @@ void LinkButton::_bind_methods() {
 	BIND_ENUM_CONSTANT(UNDERLINE_MODE_NEVER);
 
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "text"), "set_text", "get_text");
+	ADD_PROPERTY(PropertyInfo(Variant::STRING, "url"), "set_url", "get_url");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "underline", PROPERTY_HINT_ENUM, "Always,On Hover,Never"), "set_underline_mode", "get_underline_mode");
 }
 

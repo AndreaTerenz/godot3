@@ -54,6 +54,7 @@ protected:
 	virtual Size2 get_minimum_size() const;
 	void _notification(int p_what);
 	static void _bind_methods();
+	void _link_pressed();
 
 public:
 	void set_text(const String &p_text);

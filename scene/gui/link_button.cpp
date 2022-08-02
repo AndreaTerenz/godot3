@@ -29,7 +29,7 @@
 /*************************************************************************/
 
 #include "link_button.h"
-
+#include "core/os/os.h"
 #include "core/translation.h"
 
 void LinkButton::set_text(const String &p_text) {
@@ -60,6 +60,12 @@ String LinkButton::get_text() const {
 
 String LinkButton::get_url() const {
 	return url;
+}
+
+void LinkButton::_link_pressed() {
+	if (url != "") {
+		OS::get_singleton()->shell_open(url);
+	}
 }
 
 void LinkButton::set_underline_mode(UnderlineMode p_underline_mode) {
@@ -163,4 +169,6 @@ LinkButton::LinkButton() {
 	underline_mode = UNDERLINE_MODE_ALWAYS;
 	set_focus_mode(FOCUS_NONE);
 	set_default_cursor_shape(CURSOR_POINTING_HAND);
+
+	connect("pressed", this, "_link_pressed");
 }
